@@ -1,0 +1,9 @@
+﻿services:
+  auditoria:
+    build: .
+    container_name: ms-auditoria
+    ports:
+      - "8087:8087"
+    env_file:
+      - .env
+    restart: unless-stopped
