@@ -1,17 +1,28 @@
 ﻿package com.botilleria.auditoria.model;
 
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import java.util.UUID;
 
+@Entity
+@Table(name = "auditoria")
 public class RegistroAuditoria {
+
+    @Id
     private String id;
+
     private String timestamp;
-    private String origen;        // FRONTEND, MS-ORDENES, MS-NOTIFICACIONES, MS-DESPACHOS, MS-PRODUCTOS
-    private String accion;        // PRODUCTO_AGREGADO, CARRITO_LIMPIADO, ORDEN_CREADA, CORREO_SIMULADO, DESPACHO_GENERADO, STOCK_DESCONTADO
-    private String descripcion;   // Texto explicativo de la accion
-    private String nivel;         // INFO, SUCCESS, WARN, ERROR
+    private String origen;
+    private String accion;
+
+    @Column(columnDefinition = "TEXT")
+    private String descripcion;
+
+    private String nivel;
+
+    @Transient
     private Map<String, Object> detalles;
 
     public RegistroAuditoria() {

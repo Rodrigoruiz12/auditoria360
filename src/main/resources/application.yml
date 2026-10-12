@@ -1,9 +1,23 @@
-﻿server:
+server:
   port: ${SERVER_PORT:8087}
 
 spring:
   application:
     name: ms-auditoria
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://aws-1-us-west-2.pooler.supabase.com:5432/postgres?sslmode=require}
+    username: ${DB_USERNAME:postgres.luuftourpykupsbzusti}
+    password: ${DB_PASSWORD:yIhXrNMuw2LEISsy}
+    hikari:
+      maximum-pool-size: 3
+      minimum-idle: 1
+      idle-timeout: 30000
+      max-lifetime: 60000
+      connection-timeout: 20000
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
   rabbitmq:
     host: 34.236.39.87
     port: 5672
