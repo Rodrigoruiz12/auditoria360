@@ -1,4 +1,4 @@
-﻿package com.botilleria.auditoria.controller;
+package com.botilleria.auditoria.controller;
 
 import com.botilleria.auditoria.model.RegistroAuditoria;
 import com.botilleria.auditoria.service.AuditoriaService;
@@ -24,5 +24,11 @@ public class AuditoriaController {
     public ResponseEntity<RegistroAuditoria> crearRegistro(@RequestBody RegistroAuditoria registro) {
         RegistroAuditoria guardado = auditoriaService.registrar(registro);
         return ResponseEntity.ok(guardado);
+    }
+
+    @DeleteMapping
+    public ResponseEntity<Void> limpiarRegistros(@RequestParam(required = false) Integer cantidad) {
+        auditoriaService.limpiar(cantidad);
+        return ResponseEntity.noContent().build();
     }
 }

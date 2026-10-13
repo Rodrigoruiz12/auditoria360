@@ -1,4 +1,4 @@
-﻿package com.botilleria.auditoria.service;
+package com.botilleria.auditoria.service;
 
 import com.botilleria.auditoria.model.RegistroAuditoria;
 import com.botilleria.auditoria.repository.AuditoriaRepository;
@@ -59,5 +59,33 @@ public class AuditoriaService {
     public RegistroAuditoria registrarPaso(String origen, String accion, String descripcion, String nivel, Map<String, Object> detalles) {
         RegistroAuditoria nuevo = new RegistroAuditoria(origen, accion, descripcion, nivel, detalles);
         return registrar(nuevo);
+    }
+
+    public void limpiar(Integer cantidad) {
+        if (auditoriaRepository != null) {
+            try {
+                if (cantidad == null || cantidad <= 0) {
+                    auditoriaRepository.deleteAll();
+                } else {
+                    List<RegistroAuditoria> todos = auditoriaRepository.findAll();
+                    if (!todos.isEmpty()) {
+                        int start = Math.max(0, todos.size() - cantidad);
+                        List<RegistroAuditoria> aEliminar = new ArrayList<>(todos.subList(start, todos.size()));
+                        auditoriaRepository.deleteAll(aEliminar);
+                    }
+                }
+            } catch (Exception e) {
+                System.err.println("Aviso al limpiar Supabase: " + e.getMessage());
+            }
+        }
+
+        if (cantidad == null || cantidad <= 0) {
+            registrosMemoria.clear();
+        } else {
+            int start = Math.max(0, registrosMemoria.size() - cantidad);
+            while (registrosMemoria.size() > start) {
+                registrosMemoria.remove(registrosMemoria.size() - 1);
+            }
+        }
     }
 }

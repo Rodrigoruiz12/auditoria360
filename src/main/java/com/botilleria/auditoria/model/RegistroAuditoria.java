@@ -1,4 +1,4 @@
-﻿package com.botilleria.auditoria.model;
+package com.botilleria.auditoria.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
@@ -27,12 +27,14 @@ public class RegistroAuditoria {
 
     public RegistroAuditoria() {
         this.id = UUID.randomUUID().toString();
-        this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        this.timestamp = java.time.ZonedDateTime.now(java.time.ZoneId.of("America/Santiago"))
+                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }
 
     public RegistroAuditoria(String origen, String accion, String descripcion, String nivel, Map<String, Object> detalles) {
         this.id = UUID.randomUUID().toString();
-        this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        this.timestamp = java.time.ZonedDateTime.now(java.time.ZoneId.of("America/Santiago"))
+                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         this.origen = origen;
         this.accion = accion;
         this.descripcion = descripcion;
