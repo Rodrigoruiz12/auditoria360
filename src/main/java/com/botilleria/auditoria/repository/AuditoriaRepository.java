@@ -1,4 +1,4 @@
-﻿package com.botilleria.auditoria.repository;
+package com.botilleria.auditoria.repository;
 
 import com.botilleria.auditoria.model.RegistroAuditoria;
 import org.springframework.data.jpa.repository.JpaRepository;

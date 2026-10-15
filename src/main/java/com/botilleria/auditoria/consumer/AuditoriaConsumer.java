@@ -1,4 +1,4 @@
-﻿package com.botilleria.auditoria.consumer;
+package com.botilleria.auditoria.consumer;
 
 import com.botilleria.auditoria.config.RabbitMQConfig;
 import com.botilleria.auditoria.service.AuditoriaService;

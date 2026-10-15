@@ -1,4 +1,4 @@
-﻿package com.botilleria.auditoria.config;
+package com.botilleria.auditoria.config;
 
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
