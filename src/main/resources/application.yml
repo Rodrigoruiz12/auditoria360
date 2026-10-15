@@ -38,6 +38,7 @@ app:
           jwk-set-uri: https://login.microsoftonline.com/dd140621-3398-4bfe-805b-9c162df51706/discovery/v2.0/keys
           issuers:
             - https://login.microsoftonline.com/dd140621-3398-4bfe-805b-9c162df51706/v2.0
+            - https://sts.windows.net/dd140621-3398-4bfe-805b-9c162df51706/
           audiences:
             - 4a72e40f-1d5a-497a-b040-d2fa5acb61fd
             - cb8b1711-d599-4a45-94d9-9251f15db61a

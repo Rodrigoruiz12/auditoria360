@@ -58,20 +58,18 @@ public class SecurityConfig {
         Map<String, JwtDecoder> decodersPorEmisor = new LinkedHashMap<>();
 
         for (JwtProviderProperties.Provider provider : providerProperties.getProviders()) {
-            NimbusJwtDecoder decoder = NimbusJwtDecoder
-                    .withJwkSetUri(provider.getJwkSetUri())
-                    .build();
-
-            List<OAuth2TokenValidator<Jwt>> validadores = new ArrayList<>();
             for (String issuer : provider.getIssuers()) {
+                NimbusJwtDecoder decoder = NimbusJwtDecoder
+                        .withJwkSetUri(provider.getJwkSetUri())
+                        .build();
+
+                List<OAuth2TokenValidator<Jwt>> validadores = new ArrayList<>();
                 validadores.add(JwtValidators.createDefaultWithIssuer(issuer));
-            }
-            if (!provider.getAudiences().isEmpty()) {
-                validadores.add(audienceValidator(provider.getAudiences()));
-            }
-            decoder.setJwtValidator(new DelegatingOAuth2TokenValidator<>(validadores));
+                if (!provider.getAudiences().isEmpty()) {
+                    validadores.add(audienceValidator(provider.getAudiences()));
+                }
+                decoder.setJwtValidator(new DelegatingOAuth2TokenValidator<>(validadores));
 
-            for (String issuer : provider.getIssuers()) {
                 decodersPorEmisor.put(issuer, decoder);
             }
         }
